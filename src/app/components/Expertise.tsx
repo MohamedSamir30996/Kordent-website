@@ -1,9 +1,11 @@
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
+import { useLanguage } from "../i18n";
 
 export function Expertise() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const { t } = useLanguage();
 
   return (
     <section
@@ -32,31 +34,25 @@ export function Expertise() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <h2 className="text-5xl font-bold text-white mb-6">
-              Complete Solutions
+              {t("expertise.title")}
             </h2>
             <p className="text-lg text-neutral-300 mb-8">
-              Our team of specialists brings decades of
-              experience in dental technology, practice
-              optimization, and comprehensive support services.
+              {t("expertise.body")}
             </p>
             <div className="space-y-6">
               <div className="border-l-2 border-blue-500 pl-6">
                 <h3 className="text-xl font-bold text-white mb-2">
-                  Technical Excellence
+                  {t("expertise.tech.title")}
                 </h3>
-                <p className="text-neutral-400">
-                  Expert installation, calibration, and ongoing
-                  maintenance for all equipment.
-                </p>
+                <p className="text-neutral-400">{t("expertise.tech.body")}</p>
               </div>
 
               <div className="border-l-2 border-blue-500 pl-6">
                 <h3 className="text-xl font-bold text-white mb-2">
-                  24/7 Support
+                  {t("expertise.support.title")}
                 </h3>
                 <p className="text-neutral-400">
-                  Round-the-clock technical support and rapid
-                  response service teams.
+                  {t("expertise.support.body")}
                 </p>
               </div>
             </div>

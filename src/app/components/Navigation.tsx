@@ -2,23 +2,27 @@ import { motion } from "motion/react";
 import { Menu, ChevronDown, Languages } from "lucide-react";
 import { Link, useNavigate, useLocation } from "react-router";
 import { useState } from "react";
-import logo from "../../imports/Logo_(big).png";
+import projectIcon from "../../imports/kordent-project-icon.png";
+import { useLanguage, type TranslationKey } from "../i18n";
 
-const equipmentCategories = [
-  { name: "Restorative Materials", id: "restorative-materials" },
-  { name: "Etchant & Adhesives", id: "etchant-adhesives" },
-  { name: "Endodontic Materials", id: "endodontic-materials" },
-  { name: "Impression Materials", id: "impression-materials" },
-  { name: "Core Materials, Liner, EDTA", id: "core-materials" },
-  { name: "Prevention & Protection Pumice", id: "prevention-protection" },
-  { name: "K. Pumice", id: "k-pumice" },
-  { name: "Tooth Whitening Technique", id: "tooth-whitening" },
-  { name: "Other Products", id: "other-products" },
+const equipmentCategories: {
+  id: string;
+  nameKey: TranslationKey;
+}[] = [
+  { id: "restorative-materials", nameKey: "cat.restorative-materials" },
+  { id: "etchant-adhesives", nameKey: "cat.etchant-adhesives" },
+  { id: "endodontic-materials", nameKey: "cat.endodontic-materials" },
+  { id: "impression-materials", nameKey: "cat.impression-materials" },
+  { id: "core-materials", nameKey: "cat.core-materials" },
+  { id: "prevention-protection", nameKey: "cat.prevention-protection" },
+  { id: "k-pumice", nameKey: "cat.k-pumice" },
+  { id: "tooth-whitening", nameKey: "cat.tooth-whitening" },
+  { id: "other-products", nameKey: "cat.other-products" },
 ];
 
 export function Navigation() {
   const [showEquipmentDropdown, setShowEquipmentDropdown] = useState(false);
-  const [language, setLanguage] = useState<"en" | "ko">("en");
+  const { language, toggleLanguage, t } = useLanguage();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -26,7 +30,6 @@ export function Navigation() {
     setShowEquipmentDropdown(false);
 
     if (location.pathname === "/equipment") {
-      // Already on equipment page, just scroll
       setTimeout(() => {
         const element = document.getElementById(categoryId);
         if (element) {
@@ -39,7 +42,6 @@ export function Navigation() {
         }
       }, 100);
     } else {
-      // Navigate to equipment page first
       navigate("/equipment");
       setTimeout(() => {
         const element = document.getElementById(categoryId);
@@ -63,8 +65,22 @@ export function Navigation() {
       className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-neutral-200"
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link to="/" className="flex items-center">
-          <img src={logo} alt="DentalTech" className="h-10" />
+        <Link
+          to="/"
+          className="flex items-center gap-2.5"
+          aria-label="Kordent home"
+        >
+          <img
+            src={projectIcon}
+            alt=""
+            className="h-9 w-9 shrink-0 object-contain"
+            width={36}
+            height={36}
+            decoding="async"
+          />
+          <span className="text-xl font-semibold tracking-tight text-neutral-900">
+            Kordent
+          </span>
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
@@ -76,7 +92,7 @@ export function Navigation() {
                 : "text-neutral-700 hover:text-[#DC2626] border-transparent"
             }`}
           >
-            About
+            {t("nav.about")}
           </Link>
 
           {/* Products Dropdown */}
@@ -93,7 +109,7 @@ export function Navigation() {
                   : "text-neutral-700 hover:text-[#DC2626] border-transparent"
               }`}
             >
-              Products
+              {t("nav.products")}
               <ChevronDown className="w-4 h-4" />
             </Link>
 
@@ -112,7 +128,7 @@ export function Navigation() {
                       onClick={() => handleCategoryClick(category.id)}
                       className="w-full text-left block px-4 py-2 text-neutral-700 hover:bg-red-50 hover:text-[#DC2626] transition-colors"
                     >
-                      {category.name}
+                      {t(category.nameKey)}
                     </button>
                   ))}
                 </div>
@@ -128,7 +144,7 @@ export function Navigation() {
                 : "text-neutral-700 hover:text-[#DC2626] border-transparent"
             }`}
           >
-            Solutions
+            {t("nav.solutions")}
           </Link>
           <Link
             to="/contact"
@@ -138,17 +154,19 @@ export function Navigation() {
                 : "text-neutral-700 hover:text-[#DC2626] border-transparent"
             }`}
           >
-            Contact
+            {t("nav.contact")}
           </Link>
 
           {/* Language Switcher */}
           <button
-            onClick={() => setLanguage(language === "en" ? "ko" : "en")}
+            onClick={toggleLanguage}
             className="flex items-center gap-2 text-neutral-700 hover:text-[#DC2626] transition-colors"
-            aria-label="Switch language"
+            aria-label={t("nav.switchLanguage")}
           >
             <Languages className="w-5 h-5" />
-            <span className="text-sm font-medium">{language === "en" ? "EN" : "KO"}</span>
+            <span className="text-sm font-medium">
+              {language === "en" ? "EN" : "KO"}
+            </span>
           </button>
         </div>
 

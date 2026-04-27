@@ -6,28 +6,31 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { useNavigate, useLocation } from "react-router";
+import { useLanguage, type TranslationKey } from "../i18n";
 
-const services = [
+const services: {
+  icon: typeof Activity;
+  titleKey: TranslationKey;
+  descKey: TranslationKey;
+  categoryId: string;
+}[] = [
   {
     icon: Activity,
-    title: "Restorative Materials",
-    description:
-      "High-quality materials designed to restore the function, strength, and appearance of damaged teeth with reliable, long-lasting results.",
-    categoryId: "imaging-systems",
+    titleKey: "cat.restorative-materials",
+    descKey: "services.restorative.desc",
+    categoryId: "restorative-materials",
   },
   {
     icon: BadgeCheck,
-    title: "Etchant & Adhesives",
-    description:
-      "Essential bonding solutions that prepare tooth surfaces and ensure strong, secure adhesion for restorative and cosmetic procedures.",
-    categoryId: "dental-chairs",
+    titleKey: "cat.etchant-adhesives",
+    descKey: "services.etchant.desc",
+    categoryId: "etchant-adhesives",
   },
   {
     icon: ShieldCheck,
-    title: "Endodontic Materials",
-    description:
-      "Specialized materials used in root canal treatments to support effective cleaning, sealing, and long-term tooth preservation.",
-    categoryId: "cad-cam-systems",
+    titleKey: "cat.endodontic-materials",
+    descKey: "services.endodontic.desc",
+    categoryId: "endodontic-materials",
   },
 ];
 
@@ -36,6 +39,7 @@ export function Services() {
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useLanguage();
 
   const handleServiceClick = (categoryId: string) => {
     if (location.pathname === "/equipment") {
@@ -80,15 +84,17 @@ export function Services() {
           className="text-center mb-20"
         >
           <h2 className="text-5xl font-bold text-neutral-900 mb-4">
-            Our Products
+            {t("services.title")}
           </h2>
-          <p className="text-xl text-neutral-600 max-w-2xl mx-auto">Comprehensive dental technology for exceptional patient care</p>
+          <p className="text-xl text-neutral-600 max-w-2xl mx-auto">
+            {t("services.subtitle")}
+          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-12">
           {services.map((service, index) => (
             <motion.div
-              key={service.title}
+              key={service.categoryId}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{
@@ -105,10 +111,10 @@ export function Services() {
                 <service.icon className="w-8 h-8 text-blue-700" />
               </div>
               <h3 className="text-2xl font-bold text-neutral-900 mb-4">
-                {service.title}
+                {t(service.titleKey)}
               </h3>
               <p className="text-neutral-600 leading-relaxed">
-                {service.description}
+                {t(service.descKey)}
               </p>
             </motion.div>
           ))}

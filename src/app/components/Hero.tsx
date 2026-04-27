@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import HeroSection1 from "../../imports/HeroSection1/HeroSection1";
 import HeroSection2 from "../../imports/HeroSection2/HeroSection2";
 import HeroSection3 from "../../imports/HeroSection3/HeroSection3";
+import { useLanguage } from "../i18n";
 
 const heroSlides = [
   { id: 1, component: HeroSection1 },
@@ -14,6 +15,7 @@ const heroSlides = [
 
 export function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -54,7 +56,7 @@ export function Hero() {
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center gap-2 bg-white text-neutral-900 px-8 py-4 rounded-full hover:bg-neutral-100 transition-colors shadow-lg"
           >
-            Explore Products
+            {t("hero.cta")}
             <ArrowRight className="w-5 h-5" />
           </motion.button>
         </Link>

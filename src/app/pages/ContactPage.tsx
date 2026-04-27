@@ -1,7 +1,10 @@
 import { motion } from "motion/react";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { useLanguage } from "../i18n";
 
 export function ContactPage() {
+  const { t } = useLanguage();
+
   return (
     <div className="relative min-h-screen bg-white pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-6">
@@ -11,10 +14,11 @@ export function ContactPage() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">Get in Touch</h1>
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            {t("contactPage.title")}
+          </h1>
           <p className="text-xl text-neutral-600 max-w-2xl mx-auto">
-            Have questions about our equipment or services? Our team is here to
-            help you find the right solutions.
+            {t("contactPage.lead")}
           </p>
         </motion.div>
 
@@ -26,17 +30,21 @@ export function ContactPage() {
             className="space-y-8"
           >
             <div>
-              <h2 className="text-3xl font-bold mb-6">Contact Information</h2>
+              <h2 className="text-3xl font-bold mb-6">
+                {t("contactPage.info")}
+              </h2>
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <Mail className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
                   <div>
-                    <div className="font-semibold mb-1">Email</div>
+                    <div className="font-semibold mb-1">
+                      {t("contact.email")}
+                    </div>
                     <a
-                      href="mailto:info@dentaltech.com"
+                      href="mailto:info@kordent.co.kr"
                       className="text-neutral-600 hover:text-blue-600 transition-colors"
                     >
-                      info@dentaltech.com
+                      info@kordent.co.kr
                     </a>
                   </div>
                 </div>
@@ -44,7 +52,9 @@ export function ContactPage() {
                 <div className="flex items-start gap-4">
                   <Phone className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
                   <div>
-                    <div className="font-semibold mb-1">Phone</div>
+                    <div className="font-semibold mb-1">
+                      {t("contact.phone")}
+                    </div>
                     <a
                       href="tel:+1234567890"
                       className="text-neutral-600 hover:text-blue-600 transition-colors"
@@ -57,7 +67,9 @@ export function ContactPage() {
                 <div className="flex items-start gap-4">
                   <MapPin className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
                   <div>
-                    <div className="font-semibold mb-1">Address</div>
+                    <div className="font-semibold mb-1">
+                      {t("contactPage.address")}
+                    </div>
                     <div className="text-neutral-600">
                       123 Medical Plaza
                       <br />
@@ -71,19 +83,21 @@ export function ContactPage() {
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold mb-4">Business Hours</h3>
+              <h3 className="text-xl font-semibold mb-4">
+                {t("contactPage.hours.title")}
+              </h3>
               <div className="space-y-2 text-neutral-600">
                 <div className="flex justify-between">
-                  <span>Monday - Friday</span>
-                  <span>8:00 AM - 6:00 PM</span>
+                  <span>{t("contactPage.hours.weekdays")}</span>
+                  <span>{t("contactPage.hours.weekdaysHours")}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Saturday</span>
-                  <span>9:00 AM - 2:00 PM</span>
+                  <span>{t("contactPage.hours.saturday")}</span>
+                  <span>{t("contactPage.hours.saturdayHours")}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Sunday</span>
-                  <span>Closed</span>
+                  <span>{t("contactPage.hours.sunday")}</span>
+                  <span>{t("contactPage.hours.closed")}</span>
                 </div>
               </div>
             </div>
@@ -100,13 +114,13 @@ export function ContactPage() {
                   htmlFor="name"
                   className="block text-sm font-semibold mb-2"
                 >
-                  Full Name
+                  {t("contactPage.form.name")}
                 </label>
                 <input
                   type="text"
                   id="name"
                   className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="John Smith"
+                  placeholder={t("contactPage.form.namePlaceholder")}
                 />
               </div>
 
@@ -115,13 +129,13 @@ export function ContactPage() {
                   htmlFor="email"
                   className="block text-sm font-semibold mb-2"
                 >
-                  Email Address
+                  {t("contactPage.form.email")}
                 </label>
                 <input
                   type="email"
                   id="email"
                   className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="john@example.com"
+                  placeholder={t("contactPage.form.emailPlaceholder")}
                 />
               </div>
 
@@ -130,13 +144,13 @@ export function ContactPage() {
                   htmlFor="phone"
                   className="block text-sm font-semibold mb-2"
                 >
-                  Phone Number
+                  {t("contactPage.form.phone")}
                 </label>
                 <input
                   type="tel"
                   id="phone"
                   className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="+1 (234) 567-8900"
+                  placeholder={t("contactPage.form.phonePlaceholder")}
                 />
               </div>
 
@@ -145,13 +159,13 @@ export function ContactPage() {
                   htmlFor="message"
                   className="block text-sm font-semibold mb-2"
                 >
-                  Message
+                  {t("contactPage.form.message")}
                 </label>
                 <textarea
                   id="message"
                   rows={5}
                   className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
-                  placeholder="Tell us about your needs..."
+                  placeholder={t("contactPage.form.messagePlaceholder")}
                 />
               </div>
 
@@ -159,7 +173,7 @@ export function ContactPage() {
                 type="submit"
                 className="w-full bg-blue-600 text-white px-8 py-4 rounded-lg hover:bg-blue-700 transition-colors font-semibold"
               >
-                Send Message
+                {t("contactPage.form.send")}
               </button>
             </form>
           </motion.div>

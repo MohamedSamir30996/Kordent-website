@@ -5,6 +5,7 @@ import {
   ChevronDown,
   ChevronRight,
 } from "lucide-react";
+import { useLanguage, type TranslationKey } from "../i18n";
 
 const categories = [
   {
@@ -603,6 +604,7 @@ const categories = [
 ];
 
 export function Equipment() {
+  const { t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState(
     "restorative-materials",
   );
@@ -610,6 +612,18 @@ export function Equipment() {
   const [expandedCategories, setExpandedCategories] = useState<
     string[]
   >(["restorative-materials"]);
+
+  const translateCategoryName = (id: string, fallback: string) => {
+    const key = `cat.${id}` as TranslationKey;
+    const value = t(key);
+    return value === key ? fallback : value;
+  };
+
+  const translateCategoryDescription = (id: string, fallback: string) => {
+    const key = `catDesc.${id}` as TranslationKey;
+    const value = t(key);
+    return value === key ? fallback : value;
+  };
 
   const toggleCategory = (categoryId: string) => {
     setExpandedCategories((prev) =>
@@ -689,11 +703,10 @@ export function Equipment() {
             <div className="absolute inset-0 flex items-center">
               <div className="max-w-2xl px-12">
                 <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
-                  Dental Products
+                  {t("equipment.title")}
                 </h1>
                 <p className="text-xl text-white/90">
-                  Explore our comprehensive range of precision
-                  dental products and technology solutions
+                  {t("equipment.lead")}
                 </p>
               </div>
             </div>
@@ -704,7 +717,7 @@ export function Equipment() {
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
             <input
               type="text"
-              placeholder="Search products..."
+              placeholder={t("equipment.search")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-12 pr-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -723,7 +736,7 @@ export function Equipment() {
             <div className="sticky top-28">
               <div className="bg-neutral-50 rounded-lg p-6 border border-neutral-200">
                 <h3 className="text-lg font-bold text-neutral-900 mb-4">
-                  Categories
+                  {t("equipment.categories")}
                 </h3>
                 <nav className="space-y-1">
                   {categories.map((category) => (
@@ -740,7 +753,7 @@ export function Equipment() {
                         }`}
                       >
                         <span className="font-medium">
-                          {category.name}
+                          {translateCategoryName(category.id, category.name)}
                         </span>
                         {expandedCategories.includes(
                           category.id,
@@ -794,10 +807,13 @@ export function Equipment() {
               >
                 <div className="mb-12">
                   <h2 className="text-4xl font-bold text-neutral-900 mb-2">
-                    {category.name}
+                    {translateCategoryName(category.id, category.name)}
                   </h2>
                   <p className="text-lg text-neutral-600">
-                    {category.description}
+                    {translateCategoryDescription(
+                      category.id,
+                      category.description,
+                    )}
                   </p>
                 </div>
 

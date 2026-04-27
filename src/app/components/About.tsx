@@ -1,9 +1,11 @@
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
+import { useLanguage } from "../i18n";
 
 export function About() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const { t } = useLanguage();
 
   return (
     <section
@@ -19,20 +21,10 @@ export function About() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-5xl font-bold mb-6 text-[#ffffff]">
-              Leading DentalInnovation
+              {t("about.title")}
             </h2>
-            <p className="text-lg mb-6 text-[#ffffff]">
-              We provide cutting-edge dental equipment and
-              comprehensive practice solutions, empowering
-              dental professionals with the technology they need
-              for exceptional patient care.
-            </p>
-            <p className="text-lg text-[#ffffff]">
-              Our approach combines German engineering precision
-              with intuitive design, delivering equipment that
-              enhances both clinical outcomes and practice
-              efficiency.
-            </p>
+            <p className="text-lg mb-6 text-[#ffffff]">{t("about.p1")}</p>
+            <p className="text-lg text-[#ffffff]">{t("about.p2")}</p>
           </motion.div>
 
           <motion.div

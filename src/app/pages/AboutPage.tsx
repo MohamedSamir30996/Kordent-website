@@ -1,6 +1,9 @@
 import { motion } from "motion/react";
+import { useLanguage } from "../i18n";
 
 export function AboutPage() {
+  const { t } = useLanguage();
+
   return (
     <div className="relative min-h-screen bg-white pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-6">
@@ -10,10 +13,11 @@ export function AboutPage() {
           transition={{ duration: 0.6 }}
           className="max-w-4xl"
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">About DentalTech</h1>
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            {t("aboutPage.title")}
+          </h1>
           <p className="text-xl text-neutral-600 mb-12">
-            Leading the industry in precision dental equipment and integrated
-            technology solutions.
+            {t("aboutPage.lead")}
           </p>
         </motion.div>
 
@@ -36,16 +40,12 @@ export function AboutPage() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col justify-center space-y-6"
           >
-            <h2 className="text-3xl font-bold">Our Mission</h2>
+            <h2 className="text-3xl font-bold">{t("aboutPage.mission.title")}</h2>
             <p className="text-lg text-neutral-700">
-              We provide cutting-edge dental equipment designed for precision,
-              reliability, and patient comfort. Our comprehensive solutions
-              support dental professionals in delivering exceptional care.
+              {t("aboutPage.mission.p1")}
             </p>
             <p className="text-lg text-neutral-700">
-              With over 25 years of experience, we've equipped thousands of
-              practices worldwide with state-of-the-art technology and
-              comprehensive support services.
+              {t("aboutPage.mission.p2")}
             </p>
           </motion.div>
         </div>
@@ -58,15 +58,21 @@ export function AboutPage() {
         >
           <div className="text-center p-8">
             <div className="text-5xl font-bold text-blue-600 mb-2">25+</div>
-            <div className="text-lg text-neutral-700">Years of Excellence</div>
+            <div className="text-lg text-neutral-700">
+              {t("aboutPage.stats.years")}
+            </div>
           </div>
           <div className="text-center p-8">
             <div className="text-5xl font-bold text-blue-600 mb-2">5000+</div>
-            <div className="text-lg text-neutral-700">Practices Equipped</div>
+            <div className="text-lg text-neutral-700">
+              {t("aboutPage.stats.practices")}
+            </div>
           </div>
           <div className="text-center p-8">
             <div className="text-5xl font-bold text-blue-600 mb-2">40+</div>
-            <div className="text-lg text-neutral-700">Countries Served</div>
+            <div className="text-lg text-neutral-700">
+              {t("aboutPage.stats.countries")}
+            </div>
           </div>
         </motion.div>
       </div>
