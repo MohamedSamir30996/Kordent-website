@@ -1,5 +1,5 @@
 import svgPaths from "./svg-b2dv6cjr3n";
-import imgImage32 from "../Hero_1-1.png";
+import imgImage32 from "../../assets/figma/hero-1.png";
 
 function Button() {
   return (

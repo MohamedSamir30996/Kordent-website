@@ -6,8 +6,11 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { useLanguage, type TranslationKey } from "../i18n";
+import { equipmentProductImageById } from "../../assets/figma/equipmentProductImages";
+import productsPageHero from "../../assets/figma/products-page-hero.png";
+import { equipmentProductDescriptionKo } from "../data/equipmentProductDescriptionsKo";
 
-const categories = [
+const categoriesSource = [
   {
     id: "restorative-materials",
     name: "Restorative Materials",
@@ -21,8 +24,6 @@ const categories = [
           {
             id: 1,
             name: "K. Composite Resin", //YT link: https://youtube.com/shorts/EAzEvcVfLQ4?si=ppuq--nvQ7CbBNDX
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description:
               "Light-cured flowable composite resin; suitable for use in anterior and posterior teeth; classified into type 1, class 2, group 1 according to ISO 4049:2019; possesses radio-opaque characteristics with 2.9 mm aluminum step wedge.",
           },
@@ -35,15 +36,11 @@ const categories = [
           {
             id: 2,
             name: "Kit 1",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description: "Complete composite resin starter kit",
           },
           {
             id: 3,
             name: "Kit 2",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description:
               "Advanced composite resin professional kit",
           },
@@ -56,8 +53,6 @@ const categories = [
           {
             id: 4,
             name: "K. Flow Resin",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description:
               "Light-cured flowable composite resin; suitable for use in anterior and posterior teeth; classified into type 1, class 2, group 1 according to ISO 4049:2019; possesses radio-opaque characteristics with 2.9 mm aluminum step wedge.",
           },
@@ -70,8 +65,6 @@ const categories = [
           {
             id: 5,
             name: "K.Temp Flow",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description: "Temporary flowable material",
           },
         ],
@@ -83,8 +76,6 @@ const categories = [
           {
             id: 6,
             name: "K.Tem",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description: "Temporary restoration material",
           },
         ],
@@ -96,16 +87,12 @@ const categories = [
           {
             id: 7,
             name: "K. Temp Crown",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description:
               "Temporary crown material for making period of permanent crown that is highly esthetic; does not breakable on thin part so that it reduces repair case dramatically.",
           },
           {
             id: 8,
             name: "K. Temp Crown Kit",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description: "Complete temporary crown kit",
           },
         ],
@@ -117,8 +104,6 @@ const categories = [
           {
             id: 9,
             name: "K.flow for Implant",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description:
               "Flowable composite for implant restorations",
           },
@@ -131,8 +116,6 @@ const categories = [
           {
             id: 10,
             name: "K.Lay", // YT link: https://youtube.com/shorts/OwJr92ZRI_0?si=S1vzsW6n6re3SQ37
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description:
               "Semi-gel type agent containing phosphoric acid 37%; intended for use on dentin and enamel; removes the smear layer; increases adhesive strength.",
           },
@@ -153,8 +136,6 @@ const categories = [
           {
             id: 11,
             name: "K. Etch-37",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description:
               "Semi-gel type agent containing phosphoric acid 37%; intended for use on dentin and enamel; removes the smear layer; increases adhesive strength.",
           },
@@ -167,8 +148,6 @@ const categories = [
           {
             id: 12,
             name: "K. Bond",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description:
               "Light-cured flowable composite resin; suitable for use in anterior and posterior teeth; classified into type 1, class 2, group 1 according to ISO 4049:2019; possesses radio-opaque characteristics with 2.9 mm aluminum step wedge.",
           },
@@ -181,22 +160,16 @@ const categories = [
           {
             id: 13,
             name: "K. Temp Cement",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description: "Temporary cementing material",
           },
           {
             id: 14,
             name: "K. Temp Cement NE", // YT Links: https://youtube.com/shorts/HigjhEw90TE?si=a2dIpJxhuLn2OyBE
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description: "Non-eugenol temporary cement",
           },
           {
             id: 15,
             name: "Denu Temp Cement EZ",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description: "Easy-to-use temporary cement",
           },
         ],
@@ -208,8 +181,6 @@ const categories = [
           {
             id: 16,
             name: "K. Temp Cement Implant",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description:
               "Temporary cement for implant restorations",
           },
@@ -230,8 +201,6 @@ const categories = [
           {
             id: 17,
             name: "K. Sealer",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description:
               "Root canal sealer based on epoxy resin, zirconium oxide and calcium cement (MTA), etc.",
           },
@@ -244,8 +213,6 @@ const categories = [
           {
             id: 18,
             name: "K. Bio ceramic sealer",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description: "Bioceramic root canal sealer",
           },
         ],
@@ -257,8 +224,6 @@ const categories = [
           {
             id: 19,
             name: "K. Pex.",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description:
               "Oil-based temporary root canal filling material containing calcium hydroxide and iodoform; intended for temporary intracanal filling and dressing during multi-visit endodontic treatment; supplied in a pre-filled syringe system; enables convenient placement without manual mixing; allows easy removal prior to subsequent treatment procedures.",
           },
@@ -271,8 +236,6 @@ const categories = [
           {
             id: 20,
             name: "K. Paste",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description:
               "Endodontic paste for root canal treatment",
           },
@@ -285,8 +248,6 @@ const categories = [
           {
             id: 21,
             name: "K. MTA",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description:
               "Mineral trioxide aggregate for endodontics",
           },
@@ -307,8 +268,6 @@ const categories = [
           {
             id: 22,
             name: "K. Light Body",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description: "Light body impression material",
           },
         ],
@@ -320,8 +279,6 @@ const categories = [
           {
             id: 23,
             name: "K. Putty Set",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description: "Putty impression material set",
           },
         ],
@@ -333,8 +290,6 @@ const categories = [
           {
             id: 24,
             name: "K. Alginate",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description: "Alginate impression material",
           },
         ],
@@ -346,8 +301,6 @@ const categories = [
           {
             id: 25,
             name: "K. Tray Cleaner",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description: "Impression tray cleaning solution",
           },
         ],
@@ -359,8 +312,6 @@ const categories = [
           {
             id: 26,
             name: "K. Sil",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description: "Silicone impression material",
           },
         ],
@@ -380,8 +331,6 @@ const categories = [
           {
             id: 27,
             name: "K. Core",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description: "Core build-up material",
           },
         ],
@@ -393,8 +342,6 @@ const categories = [
           {
             id: 28,
             name: "K. Base Liner",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description:
               "Light-cured cavity liner and pulp-capping material; applied before the placement of restorative materials.",
           },
@@ -407,8 +354,6 @@ const categories = [
           {
             id: 29,
             name: "K. EDTA",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description:
               "EDTA solution for root canal treatment",
           },
@@ -428,8 +373,6 @@ const categories = [
           {
             id: 30,
             name: "K. Varnish",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description: "Professional fluoride varnish",
           },
         ],
@@ -441,22 +384,16 @@ const categories = [
           {
             id: 31,
             name: "K. Fluoride Gel - Strawberry",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description: "Fluoride gel with strawberry flavor",
           },
           {
             id: 32,
             name: "K. Fluoride Gel - Orange",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description: "Fluoride gel with orange flavor",
           },
           {
             id: 33,
             name: "K. Fluoride Gel - Peach",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description: "Fluoride gel with peach flavor",
           },
         ],
@@ -468,22 +405,16 @@ const categories = [
           {
             id: 34,
             name: "K. Fluoride Gel Tray - Small",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description: "Small fluoride gel application tray",
           },
           {
             id: 35,
             name: "K. Fluoride Gel Tray - Medium",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description: "Medium fluoride gel application tray",
           },
           {
             id: 36,
             name: "K. Fluoride Gel Tray - Large",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description: "Large fluoride gel application tray",
           },
         ],
@@ -502,8 +433,6 @@ const categories = [
           {
             id: 37,
             name: "Pumice Paste (with fluoride)",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description:
               "Professional pumice paste with fluoride for polishing",
           },
@@ -516,8 +445,6 @@ const categories = [
           {
             id: 38,
             name: "Pumice Paste (without fluoride)",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description:
               "Professional pumice paste without fluoride for polishing",
           },
@@ -537,16 +464,12 @@ const categories = [
           {
             id: 39,
             name: "K.Bleaching Kit 1",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description:
               "Professional tooth whitening kit - Basic",
           },
           {
             id: 40,
             name: "K.Bleaching Kit 2",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description:
               "Professional tooth whitening kit - Advanced",
           },
@@ -566,8 +489,6 @@ const categories = [
           {
             id: 41,
             name: "K. Cord",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description:
               "Gingival retraction cord for impressions",
           },
@@ -580,8 +501,6 @@ const categories = [
           {
             id: 42,
             name: "K. Oil",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description: "Lubricant oil for dental handpieces",
           },
         ],
@@ -593,8 +512,6 @@ const categories = [
           {
             id: 43,
             name: "K. Dam",
-            image:
-              "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600",
             description: "Rubber dam for isolation",
           },
         ],
@@ -603,8 +520,19 @@ const categories = [
   },
 ];
 
+const categories = categoriesSource.map((category) => ({
+  ...category,
+  subcategories: category.subcategories.map((sub) => ({
+    ...sub,
+    products: sub.products.map((product) => ({
+      ...product,
+      image: equipmentProductImageById[product.id],
+    })),
+  })),
+}));
+
 export function Equipment() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [activeCategory, setActiveCategory] = useState(
     "restorative-materials",
   );
@@ -624,6 +552,14 @@ export function Equipment() {
     const value = t(key);
     return value === key ? fallback : value;
   };
+
+  const getProductDescription = (product: {
+    id: number;
+    description: string;
+  }) =>
+    language === "ko" && equipmentProductDescriptionKo[product.id]
+      ? equipmentProductDescriptionKo[product.id]
+      : product.description;
 
   const toggleCategory = (categoryId: string) => {
     setExpandedCategories((prev) =>
@@ -695,8 +631,8 @@ export function Equipment() {
           {/* Hero Section */}
           <div className="relative h-[400px] rounded-2xl overflow-hidden mb-12">
             <img
-              src="https://www.freepik.com/free-photo/asian-female-dentist-demonstrating-teeth-brushing-technique-patient_5839214.htm#fromView=search&page=1&position=17&uuid=4c032a35-4b03-4204-b35c-e76009809e1b&query=korean+dentist"
-              alt="Dental implant model"
+              src={productsPageHero}
+              alt=""
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
@@ -821,20 +757,23 @@ export function Equipment() {
                 <div className="space-y-16">
                   {category.subcategories.map(
                     (subcategory, subIndex) => {
+                      const q = searchQuery.toLowerCase();
                       const filteredProducts =
-                        subcategory.products.filter(
-                          (product) =>
+                        subcategory.products.filter((product) => {
+                          const localizedDesc =
+                            getProductDescription(product);
+                          return (
                             product.name
                               .toLowerCase()
-                              .includes(
-                                searchQuery.toLowerCase(),
-                              ) ||
+                              .includes(q) ||
+                            localizedDesc
+                              .toLowerCase()
+                              .includes(q) ||
                             product.description
                               .toLowerCase()
-                              .includes(
-                                searchQuery.toLowerCase(),
-                              ),
-                        );
+                              .includes(q)
+                          );
+                        });
 
                       if (
                         filteredProducts.length === 0 &&
@@ -882,7 +821,7 @@ export function Equipment() {
                                       {product.name}
                                     </h3>
                                     <p className="text-neutral-600">
-                                      {product.description}
+                                      {getProductDescription(product)}
                                     </p>
                                   </div>
                                 </motion.div>

@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { useLanguage } from "../i18n";
+import { PaymentLogos } from "../components/PaymentLogos";
 
 export function ContactPage() {
   const { t } = useLanguage();
@@ -177,6 +178,13 @@ export function ContactPage() {
               </button>
             </form>
           </motion.div>
+        </div>
+
+        <div
+          aria-hidden
+          className="mt-16 pt-12 border-t border-neutral-200"
+        >
+          <PaymentLogos />
         </div>
       </div>
     </div>

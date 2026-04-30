@@ -75,7 +75,7 @@ export function Contact() {
             transition={{ duration: 0.6, delay: 0.5 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-neutral-900 text-white px-12 py-4 rounded-full hover:bg-neutral-800 transition-colors text-lg"
+            className="bg-[#DC2626] text-white px-12 py-4 rounded-full hover:bg-[#b91c1c] transition-colors text-lg"
           >
             {t("contact.cta")}
           </motion.button>

@@ -1,6 +1,7 @@
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import { useLanguage } from "../i18n";
+import completeSolutions from "../../assets/figma/complete-solutions.png";
 
 export function Expertise() {
   const ref = useRef<HTMLDivElement>(null);
@@ -22,8 +23,8 @@ export function Expertise() {
             className="relative h-[600px] rounded-2xl overflow-hidden"
           >
             <img
-              src="https://images.unsplash.com/photo-1663182234283-28941e7612da?q=80&w=2893&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="Dental professionals at work"
+              src={completeSolutions}
+              alt=""
               className="w-full h-full object-cover"
             />
           </motion.div>

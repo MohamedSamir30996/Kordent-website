@@ -1,6 +1,8 @@
 import { motion } from "motion/react";
 import { CheckCircle2 } from "lucide-react";
 import { useLanguage, type TranslationKey } from "../i18n";
+import solutionsPic1 from "../../assets/figma/solutions-pic-1.png";
+import solutionsPic2 from "../../assets/figma/solutions-pic-2.png";
 
 const solutions: {
   id: string;
@@ -19,8 +21,7 @@ const solutions: {
       "solution.setup.f3",
       "solution.setup.f4",
     ],
-    image:
-      "https://images.unsplash.com/photo-1770321119305-f191c09c5801?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZW50YWwlMjBlcXVpcG1lbnQlMjBvZmZpY2UlMjBlbXB0eSUyMGNsZWFufGVufDF8fHx8MTc3NTg1MzQ5Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+    image: solutionsPic1,
   },
   {
     id: "tech",
@@ -32,8 +33,7 @@ const solutions: {
       "solution.tech.f3",
       "solution.tech.f4",
     ],
-    image:
-      "https://images.unsplash.com/photo-1629701764404-907eed4a139d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw0fHxjb21wdXRlciUyMHRlY2hub2xvZ3klMjB3b3Jrc3BhY2UlMjBtb2Rlcm4lMjBubyUyMHBlb3BsZXxlbnwxfHx8fDE3NzU4NTM0OTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: solutionsPic2,
   },
   {
     id: "maint",
@@ -45,8 +45,7 @@ const solutions: {
       "solution.maint.f3",
       "solution.maint.f4",
     ],
-    image:
-      "https://images.unsplash.com/photo-1746842421936-461e16dd8238?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwdG9vbHMlMjBlcXVpcG1lbnQlMjBzdGVyaWxlfGVufDF8fHx8MTc3NTg1MzQ5M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+    image: solutionsPic2,
   },
 ];
 

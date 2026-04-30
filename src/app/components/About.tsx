@@ -1,6 +1,7 @@
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import { useLanguage } from "../i18n";
+import leadingDentalInnovation from "../../assets/figma/leading-dental-innovation.png";
 
 export function About() {
   const ref = useRef<HTMLDivElement>(null);
@@ -34,8 +35,8 @@ export function About() {
             className="relative h-[500px] rounded-2xl overflow-hidden"
           >
             <img
-              src="https://images.unsplash.com/photo-1771442873035-474765b40ac6?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="Modern dental equipment"
+              src={leadingDentalInnovation}
+              alt=""
               className="w-full h-full object-cover"
             />
           </motion.div>

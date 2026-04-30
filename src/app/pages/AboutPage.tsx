@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { useLanguage } from "../i18n";
+import aboutKordent from "../../assets/figma/about-kordent.png";
 
 export function AboutPage() {
   const { t } = useLanguage();
@@ -28,8 +29,8 @@ export function AboutPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <img
-              src="https://images.unsplash.com/photo-1762625570087-6d98fca29531?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZW50YWwlMjBjbGluaWMlMjBpbnRlcmlvciUyMG1vZGVybnxlbnwxfHx8fDE3NzU4MzE2MjZ8MA&ixlib=rb-4.1.0&q=80&w=1080"
-              alt="Modern dental clinic"
+              src={aboutKordent}
+              alt=""
               className="w-full h-[400px] object-cover rounded-lg"
             />
           </motion.div>

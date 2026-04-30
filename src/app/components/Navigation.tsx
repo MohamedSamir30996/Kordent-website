@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { Menu, ChevronDown, Languages } from "lucide-react";
 import { Link, useNavigate, useLocation } from "react-router";
 import { useState } from "react";
-import projectIcon from "../../imports/kordent-project-icon.png";
+import logo from "../../imports/Logo_(big).png";
 import { useLanguage, type TranslationKey } from "../i18n";
 
 const equipmentCategories: {
@@ -65,22 +65,8 @@ export function Navigation() {
       className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-neutral-200"
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link
-          to="/"
-          className="flex items-center gap-2.5"
-          aria-label="Kordent home"
-        >
-          <img
-            src={projectIcon}
-            alt=""
-            className="h-9 w-9 shrink-0 object-contain"
-            width={36}
-            height={36}
-            decoding="async"
-          />
-          <span className="text-xl font-semibold tracking-tight text-neutral-900">
-            Kordent
-          </span>
+        <Link to="/" className="flex items-center">
+          <img src={logo} alt="Kordent" className="h-10" />
         </Link>
 
         <div className="hidden md:flex items-center gap-8">

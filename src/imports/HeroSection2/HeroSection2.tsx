@@ -1,4 +1,4 @@
-import imgImage33 from "../Hero_2-1.png";
+import imgImage33 from "../../assets/figma/hero-2.png";
 
 function Container() {
   return (
