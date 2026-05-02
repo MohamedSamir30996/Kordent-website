@@ -6,6 +6,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { legalEn, legalKo } from "./legal/legalTranslations";
 
 export type Language = "en" | "ko";
 
@@ -150,6 +151,10 @@ const en = {
   "contactPage.form.message": "Message",
   "contactPage.form.messagePlaceholder": "Tell us about your needs...",
   "contactPage.form.send": "Send Message",
+  "contactPage.form.disclaimer.part1":
+    "By submitting this form, you agree that Kordent may use your contact details and message to respond to your inquiry in accordance with our ",
+  "contactPage.form.disclaimer.part2": " and ",
+  "contactPage.form.disclaimer.part3": ".",
 
   // Equipment page
   "equipment.title": "Dental Products",
@@ -157,6 +162,8 @@ const en = {
     "Explore our comprehensive range of precision dental products and technology solutions",
   "equipment.search": "Search products...",
   "equipment.categories": "Categories",
+
+  ...legalEn,
 } as const;
 
 export type TranslationKey = keyof typeof en;
@@ -296,12 +303,18 @@ const ko: Record<TranslationKey, string> = {
   "contactPage.form.message": "메시지",
   "contactPage.form.messagePlaceholder": "필요하신 사항을 알려주세요...",
   "contactPage.form.send": "메시지 보내기",
+  "contactPage.form.disclaimer.part1":
+    "본 양식을 제출함으로써 귀하는 Kordent가 귀하의 연락처 정보 및 메시지를 문의 응답을 위해 이용하는 것에 동의하며, 그 처리는 당사의 ",
+  "contactPage.form.disclaimer.part2": " 및 ",
+  "contactPage.form.disclaimer.part3": "의 적용을 받습니다.",
 
   // Equipment page
   "equipment.title": "치과 제품",
   "equipment.lead": "정밀 치과 제품과 기술 솔루션의 종합 라인업을 만나보세요",
   "equipment.search": "제품 검색...",
   "equipment.categories": "카테고리",
+
+  ...legalKo,
 };
 
 const dictionaries = { en, ko } as const;

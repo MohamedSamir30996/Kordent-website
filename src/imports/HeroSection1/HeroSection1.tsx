@@ -1,5 +1,6 @@
 import svgPaths from "./svg-b2dv6cjr3n";
-import imgImage32 from "../../assets/figma/hero-1.png";
+import imgHeroDesktop from "../../assets/figma/hero-1.png";
+import imgHeroMobile from "../../assets/figma/Hero 1 mobile.png";
 
 function Button() {
   return (
@@ -79,9 +80,18 @@ function TextHolder() {
 
 export default function HeroSection() {
   return (
-    <div className="overflow-clip relative rounded-[16px] size-full" data-name="Hero section 1">
+    <div className="overflow-clip relative max-md:rounded-none rounded-[16px] size-full" data-name="Hero section 1">
       <div className="absolute inset-0" data-name="image 32">
-        <img alt="" className="absolute inset-0 w-full h-full object-contain pointer-events-none" src={imgImage32} />
+        <img
+          alt=""
+          src={imgHeroMobile}
+          className="absolute inset-0 h-full w-full min-w-full object-cover object-center pointer-events-none md:hidden"
+        />
+        <img
+          alt=""
+          src={imgHeroDesktop}
+          className="absolute inset-0 hidden h-full w-full object-contain pointer-events-none md:block"
+        />
       </div>
       <Shadow />
       <Container />

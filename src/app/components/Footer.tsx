@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { useLanguage } from "../i18n";
 
 export function Footer() {
@@ -9,7 +10,7 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-2xl font-bold">KORDENT</div>
 
-          <div className="flex gap-8 text-sm text-neutral-400">
+          <div className="flex flex-wrap gap-x-8 gap-y-2 justify-center text-sm text-neutral-400">
             <a href="#about" className="hover:text-white transition-colors">
               {t("footer.about")}
             </a>
@@ -22,9 +23,15 @@ export function Footer() {
             <a href="#contact" className="hover:text-white transition-colors">
               {t("footer.contact")}
             </a>
+            <Link to="/privacy" className="hover:text-white transition-colors">
+              {t("footer.privacy")}
+            </Link>
+            <Link to="/terms" className="hover:text-white transition-colors">
+              {t("footer.terms")}
+            </Link>
           </div>
 
-          <div className="text-sm text-neutral-400">
+          <div className="text-sm text-neutral-400 text-center md:text-right">
             {t("footer.copyright")}
           </div>
         </div>

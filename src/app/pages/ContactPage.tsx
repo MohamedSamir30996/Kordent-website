@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { Link } from "react-router";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { useLanguage } from "../i18n";
 import { PaymentLogos } from "../components/PaymentLogos";
@@ -176,6 +177,24 @@ export function ContactPage() {
               >
                 {t("contactPage.form.send")}
               </button>
+
+              <p className="text-sm text-neutral-600 leading-relaxed">
+                {t("contactPage.form.disclaimer.part1")}
+                <Link
+                  to="/privacy"
+                  className="text-red-600 hover:text-red-700 hover:underline font-medium"
+                >
+                  {t("footer.privacy")}
+                </Link>
+                {t("contactPage.form.disclaimer.part2")}
+                <Link
+                  to="/terms"
+                  className="text-red-600 hover:text-red-700 hover:underline font-medium"
+                >
+                  {t("footer.terms")}
+                </Link>
+                {t("contactPage.form.disclaimer.part3")}
+              </p>
             </form>
           </motion.div>
         </div>
