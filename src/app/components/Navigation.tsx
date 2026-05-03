@@ -71,6 +71,16 @@ export function Navigation() {
 
         <div className="hidden md:flex items-center gap-8">
           <Link
+            to="/"
+            className={`transition-colors pb-1 border-b-2 ${
+              location.pathname === "/"
+                ? "text-blue-600 border-blue-600"
+                : "text-neutral-700 hover:text-[#DC2626] border-transparent"
+            }`}
+          >
+            {t("nav.home")}
+          </Link>
+          <Link
             to="/about"
             className={`transition-colors pb-1 border-b-2 ${
               location.pathname === "/about"

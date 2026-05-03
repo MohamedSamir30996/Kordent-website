@@ -14,6 +14,7 @@ const STORAGE_KEY = "kordent.lang";
 
 const en = {
   // Navigation
+  "nav.home": "Home",
   "nav.about": "About",
   "nav.products": "Products",
   "nav.solutions": "Solutions",
@@ -170,6 +171,7 @@ export type TranslationKey = keyof typeof en;
 
 const ko: Record<TranslationKey, string> = {
   // Navigation
+  "nav.home": "홈",
   "nav.about": "회사 소개",
   "nav.products": "제품",
   "nav.solutions": "솔루션",
