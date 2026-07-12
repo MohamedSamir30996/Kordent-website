@@ -107,3 +107,4 @@ export function getEquipmentCategories(
 }
 
 export { equipmentCategoriesSource, getEquipmentProductBySlug };
+export { getProductVideoIds, youtubeEmbedUrl } from "./productVideos";

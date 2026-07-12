@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { Home, ZoomIn, X } from "lucide-react";
 import { useLanguage, type TranslationKey } from "../i18n";
-import { getLocalizedProductBySlug } from "../data/equipment";
+import { getLocalizedProductBySlug, getProductVideoIds, youtubeEmbedUrl } from "../data/equipment";
 
-type TabId = "details" | "packages";
+type TabId = "details" | "packages" | "videos";
 
 export function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -40,6 +40,8 @@ export function ProductDetailPage() {
   })();
 
   const mainImage = product.gallery[activeImage] ?? product.image;
+  const videoIds = getProductVideoIds(product.id);
+  const hasVideos = videoIds.length > 0;
 
   return (
     <div className="relative min-h-screen bg-white pt-24 pb-16">
@@ -155,6 +157,19 @@ export function ProductDetailPage() {
             >
               {t("product.tab.packages")}
             </button>
+            {hasVideos && (
+              <button
+                type="button"
+                onClick={() => setActiveTab("videos")}
+                className={`px-8 py-3 text-sm font-semibold border border-b-0 border-l-0 transition-colors ${
+                  activeTab === "videos"
+                    ? "bg-sky-600 text-white border-sky-600"
+                    : "bg-neutral-100 text-neutral-700 border-neutral-200 hover:bg-neutral-200"
+                }`}
+              >
+                {t("product.tab.videos")}
+              </button>
+            )}
           </div>
         </div>
 
@@ -192,6 +207,28 @@ export function ProductDetailPage() {
             ) : (
               <p className="text-neutral-600">{t("product.packages.empty")}</p>
             ))}
+
+          {activeTab === "videos" && hasVideos && (
+            <div className="grid gap-8 sm:grid-cols-2">
+              {videoIds.map((videoId, index) => (
+                <div
+                  key={videoId}
+                  className="w-full max-w-md mx-auto sm:max-w-none"
+                >
+                  <div className="aspect-[9/16] sm:aspect-video w-full overflow-hidden rounded-lg border border-neutral-200 bg-black shadow-sm">
+                    <iframe
+                      src={youtubeEmbedUrl(videoId)}
+                      title={`${product.name} — ${t("product.tab.videos")} ${index + 1}`}
+                      className="h-full w-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
