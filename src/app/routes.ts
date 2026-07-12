@@ -8,6 +8,7 @@ import { SolutionsPage } from "./pages/SolutionsPage";
 import { ContactPage } from "./pages/ContactPage";
 import { PrivacyPolicyPage } from "./pages/PrivacyPolicyPage";
 import { TermsOfUsePage } from "./pages/TermsOfUsePage";
+import { NotFoundPage } from "./pages/NotFoundPage";
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ export const router = createBrowserRouter([
       { path: "contact", Component: ContactPage },
       { path: "privacy", Component: PrivacyPolicyPage },
       { path: "terms", Component: TermsOfUsePage },
+      { path: "*", Component: NotFoundPage },
     ],
   },
 ]);

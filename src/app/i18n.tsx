@@ -174,6 +174,12 @@ const en = {
   "product.backToProducts": "Back to products",
   "product.closeEnlarge": "Close enlarged image",
 
+  "notFound.title": "Page not found",
+  "notFound.lead":
+    "The page you are looking for does not exist or may have been moved.",
+  "notFound.home": "Go to Home",
+  "notFound.products": "Browse Products",
+
   ...legalEn,
 } as const;
 
@@ -335,6 +341,12 @@ const ko: Record<TranslationKey, string> = {
   "product.notFound": "제품을 찾을 수 없습니다",
   "product.backToProducts": "제품 목록으로 돌아가기",
   "product.closeEnlarge": "확대 이미지 닫기",
+
+  "notFound.title": "페이지를 찾을 수 없습니다",
+  "notFound.lead":
+    "요청하신 페이지가 존재하지 않거나 이동되었을 수 있습니다.",
+  "notFound.home": "홈으로 이동",
+  "notFound.products": "제품 보기",
 
   ...legalKo,
 };
