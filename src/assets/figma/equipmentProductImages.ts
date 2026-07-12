@@ -63,4 +63,6 @@ export const equipmentProductImageById: Record<number, string> = {
   41: kBond,
   42: kBond,
   43: kOrtho,
+  44: kOrtho,
+  45: kOrtho1,
 };

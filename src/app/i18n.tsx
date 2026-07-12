@@ -164,6 +164,15 @@ const en = {
   "equipment.search": "Search products...",
   "equipment.categories": "Categories",
 
+  "product.breadcrumb.products": "Products",
+  "product.tab.details": "Product Details",
+  "product.tab.packages": "Packages",
+  "product.clickToEnlarge": "Click to enlarge the photo.",
+  "product.packages.empty": "Package information is not available for this product.",
+  "product.notFound": "Product not found",
+  "product.backToProducts": "Back to products",
+  "product.closeEnlarge": "Close enlarged image",
+
   ...legalEn,
 } as const;
 
@@ -315,6 +324,15 @@ const ko: Record<TranslationKey, string> = {
   "equipment.lead": "정밀 치과 제품과 기술 솔루션의 종합 라인업을 만나보세요",
   "equipment.search": "제품 검색...",
   "equipment.categories": "카테고리",
+
+  "product.breadcrumb.products": "제품",
+  "product.tab.details": "제품 상세",
+  "product.tab.packages": "포장",
+  "product.clickToEnlarge": "사진을 클릭하면 확대됩니다.",
+  "product.packages.empty": "이 제품의 포장 정보가 없습니다.",
+  "product.notFound": "제품을 찾을 수 없습니다",
+  "product.backToProducts": "제품 목록으로 돌아가기",
+  "product.closeEnlarge": "확대 이미지 닫기",
 
   ...legalKo,
 };

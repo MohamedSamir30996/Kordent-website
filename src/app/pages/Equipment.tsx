@@ -1,538 +1,21 @@
 import { motion } from "motion/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import { Link } from "react-router";
 import {
   Search,
   ChevronDown,
   ChevronRight,
 } from "lucide-react";
 import { useLanguage, type TranslationKey } from "../i18n";
-import { equipmentProductImageById } from "../../assets/figma/equipmentProductImages";
+import { getEquipmentCategories } from "../data/equipment";
 import productsPageHero from "../../assets/figma/products-page-hero.png";
-import { equipmentProductDescriptionKo } from "../data/equipmentProductDescriptionsKo";
-
-const categoriesSource = [
-  {
-    id: "restorative-materials",
-    name: "Restorative Materials",
-    description:
-      "High-quality materials for dental restorations",
-    subcategories: [
-      {
-        id: "composite-resin",
-        name: "K. Composite Resin",
-        products: [
-          {
-            id: 1,
-            name: "K. Composite Resin", //YT link: https://youtube.com/shorts/EAzEvcVfLQ4?si=ppuq--nvQ7CbBNDX
-            description:
-              "Light-cured flowable composite resin; suitable for use in anterior and posterior teeth; classified into type 1, class 2, group 1 according to ISO 4049:2019; possesses radio-opaque characteristics with 2.9 mm aluminum step wedge.",
-          },
-        ],
-      },
-      {
-        id: "composite-resin-kit", // YT links: https://youtube.com/shorts/EAzEvcVfLQ4?si=ppuq--nvQ7CbBNDX and https://youtube.com/shorts/OwJr92ZRI_0?si=S1vzsW6n6re3SQ37
-        name: "K. Composite Resin Kit",
-        products: [
-          {
-            id: 2,
-            name: "Kit 1",
-            description: "Complete composite resin starter kit",
-          },
-          {
-            id: 3,
-            name: "Kit 2",
-            description:
-              "Advanced composite resin professional kit",
-          },
-        ],
-      },
-      {
-        id: "flow-resin",
-        name: "K. Flow Resin",
-        products: [
-          {
-            id: 4,
-            name: "K. Flow Resin",
-            description:
-              "Light-cured flowable composite resin; suitable for use in anterior and posterior teeth; classified into type 1, class 2, group 1 according to ISO 4049:2019; possesses radio-opaque characteristics with 2.9 mm aluminum step wedge.",
-          },
-        ],
-      },
-      {
-        id: "temp-flow",
-        name: "K.Temp Flow", // YT link: https://youtube.com/shorts/XuewexHQtNI?si=dtSM4C9YXhUwn1bz
-        products: [
-          {
-            id: 5,
-            name: "K.Temp Flow",
-            description: "Temporary flowable material",
-          },
-        ],
-      },
-      {
-        id: "k-tem",
-        name: "K.Tem",
-        products: [
-          {
-            id: 6,
-            name: "K.Tem",
-            description: "Temporary restoration material",
-          },
-        ],
-      },
-      {
-        id: "temp-crown",
-        name: "K. Temp Crown",
-        products: [
-          {
-            id: 7,
-            name: "K. Temp Crown",
-            description:
-              "Temporary crown material for making period of permanent crown that is highly esthetic; does not breakable on thin part so that it reduces repair case dramatically.",
-          },
-          {
-            id: 8,
-            name: "K. Temp Crown Kit",
-            description: "Complete temporary crown kit",
-          },
-        ],
-      },
-      {
-        id: "flow-implant",
-        name: "K.flow for Implant",
-        products: [
-          {
-            id: 9,
-            name: "K.flow for Implant",
-            description:
-              "Flowable composite for implant restorations",
-          },
-        ],
-      },
-      {
-        id: "k-lay",
-        name: "K.Lay",
-        products: [
-          {
-            id: 10,
-            name: "K.Lay", // YT link: https://youtube.com/shorts/OwJr92ZRI_0?si=S1vzsW6n6re3SQ37
-            description:
-              "Semi-gel type agent containing phosphoric acid 37%; intended for use on dentin and enamel; removes the smear layer; increases adhesive strength.",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: "etchant-adhesives",
-    name: "Etchant & Adhesives",
-    description:
-      "Bonding and etching solutions for optimal adhesion",
-    subcategories: [
-      {
-        id: "k-etch-37", // YT links: https://youtube.com/shorts/df4-2E8sn6s?si=TaFuOYJEMfr5W3Gh
-        name: "K. Etch-37",
-        products: [
-          {
-            id: 11,
-            name: "K. Etch-37",
-            description:
-              "Semi-gel type agent containing phosphoric acid 37%; intended for use on dentin and enamel; removes the smear layer; increases adhesive strength.",
-          },
-        ],
-      },
-      {
-        id: "k-bond", // YT links: https://youtube.com/shorts/bdl5Oa17Zh4?si=ZGhYO5F97i52gwde
-        name: "K. Bond",
-        products: [
-          {
-            id: 12,
-            name: "K. Bond",
-            description:
-              "Light-cured flowable composite resin; suitable for use in anterior and posterior teeth; classified into type 1, class 2, group 1 according to ISO 4049:2019; possesses radio-opaque characteristics with 2.9 mm aluminum step wedge.",
-          },
-        ],
-      },
-      {
-        id: "temp-cement",
-        name: "K. Temp Cement",
-        products: [
-          {
-            id: 13,
-            name: "K. Temp Cement",
-            description: "Temporary cementing material",
-          },
-          {
-            id: 14,
-            name: "K. Temp Cement NE", // YT Links: https://youtube.com/shorts/HigjhEw90TE?si=a2dIpJxhuLn2OyBE
-            description: "Non-eugenol temporary cement",
-          },
-          {
-            id: 15,
-            name: "Denu Temp Cement EZ",
-            description: "Easy-to-use temporary cement",
-          },
-        ],
-      },
-      {
-        id: "temp-cement-implant",
-        name: "K. Temp Cement Implant",
-        products: [
-          {
-            id: 16,
-            name: "K. Temp Cement Implant",
-            description:
-              "Temporary cement for implant restorations",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: "endodontic-materials",
-    name: "Endodontic Materials",
-    description:
-      "Specialized materials for root canal treatments",
-    subcategories: [
-      {
-        id: "k-sealer",
-        name: "K. Sealer", // YT Links: https://youtu.be/uwE3f5kejik?si=U_QgkxgGI6cKPf4q
-        products: [
-          {
-            id: 17,
-            name: "K. Sealer",
-            description:
-              "Root canal sealer based on epoxy resin, zirconium oxide and calcium cement (MTA), etc.",
-          },
-        ],
-      },
-      {
-        id: "k-bio-ceramic-sealer",
-        name: "K. Bio ceramic sealer", // YT link: https://youtube.com/shorts/CPjbmHIhirc?si=LclgG7WVCCswxKfn
-        products: [
-          {
-            id: 18,
-            name: "K. Bio ceramic sealer",
-            description: "Bioceramic root canal sealer",
-          },
-        ],
-      },
-      {
-        id: "k-pex",
-        name: "K. Pex.",
-        products: [
-          {
-            id: 19,
-            name: "K. Pex.",
-            description:
-              "Oil-based temporary root canal filling material containing calcium hydroxide and iodoform; intended for temporary intracanal filling and dressing during multi-visit endodontic treatment; supplied in a pre-filled syringe system; enables convenient placement without manual mixing; allows easy removal prior to subsequent treatment procedures.",
-          },
-        ],
-      },
-      {
-        id: "k-paste", // YT link: https://youtu.be/oUamBvD-_g0?si=Q95Om14NACmTBsAb
-        name: "K. Paste",
-        products: [
-          {
-            id: 20,
-            name: "K. Paste",
-            description:
-              "Endodontic paste for root canal treatment",
-          },
-        ],
-      },
-      {
-        id: "k-mta", // YT link: https://youtube.com/shorts/hFdQdAB2nWo?si=nFB05cf1OZlOjPaT
-        name: "K. MTA",
-        products: [
-          {
-            id: 21,
-            name: "K. MTA",
-            description:
-              "Mineral trioxide aggregate for endodontics",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: "impression-materials",
-    name: "Impression Materials",
-    description:
-      "Precision materials for accurate dental impressions",
-    subcategories: [
-      {
-        id: "k-light-body",
-        name: "K. Light Body",
-        products: [
-          {
-            id: 22,
-            name: "K. Light Body",
-            description: "Light body impression material",
-          },
-        ],
-      },
-      {
-        id: "k-putty-set",
-        name: "K. Putty Set",
-        products: [
-          {
-            id: 23,
-            name: "K. Putty Set",
-            description: "Putty impression material set",
-          },
-        ],
-      },
-      {
-        id: "k-alginate",
-        name: "K. Alginate",
-        products: [
-          {
-            id: 24,
-            name: "K. Alginate",
-            description: "Alginate impression material",
-          },
-        ],
-      },
-      {
-        id: "k-tray-cleaner",
-        name: "K. Tray Cleaner",
-        products: [
-          {
-            id: 25,
-            name: "K. Tray Cleaner",
-            description: "Impression tray cleaning solution",
-          },
-        ],
-      },
-      {
-        id: "k-sil",
-        name: "K. Sil",
-        products: [
-          {
-            id: 26,
-            name: "K. Sil",
-            description: "Silicone impression material",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: "core-materials",
-    name: "Core Materials, Liner, EDTA",
-    description:
-      "Essential materials for core build-up and cavity preparation",
-    subcategories: [
-      {
-        id: "k-core",
-        name: "K. Core",
-        products: [
-          {
-            id: 27,
-            name: "K. Core",
-            description: "Core build-up material",
-          },
-        ],
-      },
-      {
-        id: "k-base-liner",
-        name: "K. Base Liner",
-        products: [
-          {
-            id: 28,
-            name: "K. Base Liner",
-            description:
-              "Light-cured cavity liner and pulp-capping material; applied before the placement of restorative materials.",
-          },
-        ],
-      },
-      {
-        id: "k-edta",
-        name: "K. EDTA",
-        products: [
-          {
-            id: 29,
-            name: "K. EDTA",
-            description:
-              "EDTA solution for root canal treatment",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: "prevention-protection",
-    name: "Prevention & protection Pumice",
-    description: "Preventive care and protection products",
-    subcategories: [
-      {
-        id: "k-fluoride-varnish",
-        name: "K. Fluoride Varnish",
-        products: [
-          {
-            id: 30,
-            name: "K. Varnish",
-            description: "Professional fluoride varnish",
-          },
-        ],
-      },
-      {
-        id: "k-fluoride-gel",
-        name: "K. Fluoride Gel",
-        products: [
-          {
-            id: 31,
-            name: "K. Fluoride Gel - Strawberry",
-            description: "Fluoride gel with strawberry flavor",
-          },
-          {
-            id: 32,
-            name: "K. Fluoride Gel - Orange",
-            description: "Fluoride gel with orange flavor",
-          },
-          {
-            id: 33,
-            name: "K. Fluoride Gel - Peach",
-            description: "Fluoride gel with peach flavor",
-          },
-        ],
-      },
-      {
-        id: "k-fluoride-gel-tray",
-        name: "K. Fluoride Gel Tray",
-        products: [
-          {
-            id: 34,
-            name: "K. Fluoride Gel Tray - Small",
-            description: "Small fluoride gel application tray",
-          },
-          {
-            id: 35,
-            name: "K. Fluoride Gel Tray - Medium",
-            description: "Medium fluoride gel application tray",
-          },
-          {
-            id: 36,
-            name: "K. Fluoride Gel Tray - Large",
-            description: "Large fluoride gel application tray",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: "k-pumice",
-    name: "K. Pumice",
-    description: "Professional pumice products for polishing",
-    subcategories: [
-      {
-        id: "pumice-paste-with-fluoride",
-        name: "Pumice Paste (with fluoride)",
-        products: [
-          {
-            id: 37,
-            name: "Pumice Paste (with fluoride)",
-            description:
-              "Professional pumice paste with fluoride for polishing",
-          },
-        ],
-      },
-      {
-        id: "pumice-paste-without-fluoride",
-        name: "Pumice Paste (without fluoride)",
-        products: [
-          {
-            id: 38,
-            name: "Pumice Paste (without fluoride)",
-            description:
-              "Professional pumice paste without fluoride for polishing",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: "tooth-whitening",
-    name: "Tooth Whitening Technique",
-    description: "Professional tooth whitening systems",
-    subcategories: [
-      {
-        id: "k-bleaching",
-        name: "K.Bleaching",
-        products: [
-          {
-            id: 39,
-            name: "K.Bleaching Kit 1",
-            description:
-              "Professional tooth whitening kit - Basic",
-          },
-          {
-            id: 40,
-            name: "K.Bleaching Kit 2",
-            description:
-              "Professional tooth whitening kit - Advanced",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: "other-products",
-    name: "Other products",
-    description: "Essential dental accessories and supplies",
-    subcategories: [
-      {
-        id: "k-cord",
-        name: "K. Cord (Retraction Cord)",
-        products: [
-          {
-            id: 41,
-            name: "K. Cord",
-            description:
-              "Gingival retraction cord for impressions",
-          },
-        ],
-      },
-      {
-        id: "k-oil",
-        name: "K. Oil (lubricant Handpieces)",
-        products: [
-          {
-            id: 42,
-            name: "K. Oil",
-            description: "Lubricant oil for dental handpieces",
-          },
-        ],
-      },
-      {
-        id: "k-dam", // YT link: https://youtube.com/shorts/3robbMKaKcQ?si=ejfYy2u2z-cvgCuY
-        name: "K. Dam",
-        products: [
-          {
-            id: 43,
-            name: "K. Dam",
-            description: "Rubber dam for isolation",
-          },
-        ],
-      },
-    ],
-  },
-];
-
-const categories = categoriesSource.map((category) => ({
-  ...category,
-  subcategories: category.subcategories.map((sub) => ({
-    ...sub,
-    products: sub.products.map((product) => ({
-      ...product,
-      image: equipmentProductImageById[product.id],
-    })),
-  })),
-}));
 
 export function Equipment() {
   const { t, language } = useLanguage();
+  const categories = useMemo(
+    () => getEquipmentCategories(language),
+    [language],
+  );
   const [activeCategory, setActiveCategory] = useState(
     "restorative-materials",
   );
@@ -553,14 +36,6 @@ export function Equipment() {
     return value === key ? fallback : value;
   };
 
-  const getProductDescription = (product: {
-    id: number;
-    description: string;
-  }) =>
-    language === "ko" && equipmentProductDescriptionKo[product.id]
-      ? equipmentProductDescriptionKo[product.id]
-      : product.description;
-
   const toggleCategory = (categoryId: string) => {
     setExpandedCategories((prev) =>
       prev.includes(categoryId)
@@ -568,6 +43,13 @@ export function Equipment() {
         : [...prev, categoryId],
     );
   };
+
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "");
+    if (hash) {
+      setTimeout(() => scrollToCategory(hash), 150);
+    }
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -593,7 +75,7 @@ export function Equipment() {
     window.addEventListener("scroll", handleScroll);
     return () =>
       window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [categories]);
 
   const scrollToCategory = (categoryId: string) => {
     const element = document.getElementById(categoryId);
@@ -628,7 +110,6 @@ export function Equipment() {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          {/* Hero Section */}
           <div className="relative h-[400px] rounded-2xl overflow-hidden mb-12">
             <img
               src={productsPageHero}
@@ -648,7 +129,6 @@ export function Equipment() {
             </div>
           </div>
 
-          {/* Search Bar */}
           <div className="relative max-w-xl">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
             <input
@@ -662,7 +142,6 @@ export function Equipment() {
         </motion.div>
 
         <div className="flex gap-12">
-          {/* Fixed Category Sidebar */}
           <motion.aside
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -728,7 +207,6 @@ export function Equipment() {
             </div>
           </motion.aside>
 
-          {/* Categories with Products */}
           <div className="flex-1 space-y-20">
             {categories.map((category, categoryIndex) => (
               <motion.div
@@ -753,23 +231,23 @@ export function Equipment() {
                   </p>
                 </div>
 
-                {/* Subcategories */}
                 <div className="space-y-16">
                   {category.subcategories.map(
                     (subcategory, subIndex) => {
                       const q = searchQuery.toLowerCase();
                       const filteredProducts =
                         subcategory.products.filter((product) => {
-                          const localizedDesc =
-                            getProductDescription(product);
                           return (
                             product.name
                               .toLowerCase()
                               .includes(q) ||
-                            localizedDesc
+                            product.description
                               .toLowerCase()
                               .includes(q) ||
-                            product.description
+                            product.tagline
+                              .toLowerCase()
+                              .includes(q) ||
+                            product.summary
                               .toLowerCase()
                               .includes(q)
                           );
@@ -806,24 +284,28 @@ export function Equipment() {
                                       productIndex * 0.1,
                                   }}
                                   whileHover={{ y: -8 }}
-                                  className="group cursor-pointer"
                                 >
-                                  <div className="relative overflow-hidden rounded-lg mb-4 aspect-[4/3]">
-                                    <img
-                                      src={product.image}
-                                      alt={product.name}
-                                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                  </div>
-                                  <div className="space-y-2">
-                                    <h3 className="text-xl font-semibold group-hover:text-blue-600 transition-colors">
-                                      {product.name}
-                                    </h3>
-                                    <p className="text-neutral-600">
-                                      {getProductDescription(product)}
-                                    </p>
-                                  </div>
+                                  <Link
+                                    to={`/equipment/${product.slug}`}
+                                    className="group block"
+                                  >
+                                    <div className="relative overflow-hidden rounded-lg mb-4 aspect-[4/3] bg-neutral-50">
+                                      <img
+                                        src={product.image}
+                                        alt={product.name}
+                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                      />
+                                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                    </div>
+                                    <div className="space-y-2">
+                                      <h3 className="text-xl font-semibold group-hover:text-blue-600 transition-colors">
+                                        {product.name}
+                                      </h3>
+                                      <p className="text-neutral-600 line-clamp-3">
+                                        {product.description}
+                                      </p>
+                                    </div>
+                                  </Link>
                                 </motion.div>
                               ),
                             )}
