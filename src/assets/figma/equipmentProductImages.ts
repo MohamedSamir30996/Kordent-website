@@ -7,6 +7,7 @@ import kEtch37 from "./k-etch-37.png";
 import kBond from "./k-bond.png";
 import kBio from "./k-bio.png";
 import kPex from "./k-pex.png";
+import kSealer from "./k-sealer.jpg";
 import kPaste from "./k-paste.png";
 import kCore from "./k-core.png";
 import kCore2 from "./k-core-2.png";
@@ -36,7 +37,7 @@ export const equipmentProductImageById: Record<number, string> = {
   14: kTemp,
   15: kTemp,
   16: kTemp,
-  17: kPex,
+  17: kSealer,
   18: kBio,
   19: kPex,
   20: kPaste,
