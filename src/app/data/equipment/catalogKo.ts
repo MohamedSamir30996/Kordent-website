@@ -197,6 +197,30 @@ export const catalogKoByProductId: Record<number, LocalizedProductFields> = {
     ],
     packages: [{ items: ["2g 시린지 2개, 팁"] }],
   },
+  46: {
+    tagline: "광중합 교정용 접착제",
+    summary:
+      "K. Ortho 광중합 교정용 접착제는 뛰어난 범용성, 편리한 조작성, 심미성 및 신뢰성을 제공하는 첨단 기술의 교정용 접착제입니다.",
+    highlights: [
+      "다양한 교정 시술에 활용 가능한 접착제",
+      "편리한 조작성과 신뢰할 수 있는 성능",
+      "효율적인 중합을 위한 높은 광감도",
+    ],
+    description:
+      "범용성, 편리한 조작성, 심미성 및 신뢰성을 갖춘 광중합 교정용 접착제입니다.",
+    details: [
+      {
+        title: "특징",
+        items: [
+          "첨단 광중합 교정용 접착 기술",
+          "뛰어난 범용성과 편리한 조작성",
+          "심미적이며 신뢰할 수 있는 임상 성능",
+          "효율적인 중합을 위한 높은 광감도",
+        ],
+      },
+    ],
+    packages: [{ items: ["2g 시린지 2개, 팁"] }],
+  },
   8: {
     tagline: "임시 크라운 제작용 완성 키트",
     summary:

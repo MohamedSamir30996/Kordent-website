@@ -299,6 +299,39 @@ export const equipmentCategoriesSource: EquipmentCategory[] = [
         ],
       },
       {
+        id: "k-ortho",
+        name: "K. Ortho",
+        products: [
+          {
+            id: 46,
+            slug: "k-ortho",
+            name: "K. Ortho",
+            tagline: "Light Cure Orthodontic Adhesive",
+            summary:
+              "K. Ortho Light Cure Orthodontic Adhesive represents state-of-the-art technology, offering desirable versatility, ease of handling, aesthetics, and reliability.",
+            highlights: [
+              "Versatile orthodontic adhesive",
+              "Easy handling and reliable performance",
+              "High light sensitivity for efficient curing",
+            ],
+            details: [
+              {
+                title: "Features",
+                items: [
+                  "State-of-the-art light-cure orthodontic adhesive technology",
+                  "Excellent versatility and ease of handling",
+                  "Aesthetic and reliable clinical performance",
+                  "High light sensitivity for efficient curing",
+                ],
+              },
+            ],
+            packages: [{ items: ["2 × 2g syringes, tips"] }],
+            description:
+              "Light-cure orthodontic adhesive designed for versatility, easy handling, aesthetics, and reliability.",
+          },
+        ],
+      },
+      {
         id: "flow-implant",
         name: "K.flow for Implant",
         products: [
