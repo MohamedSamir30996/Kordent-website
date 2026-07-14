@@ -149,7 +149,7 @@ export function Equipment() {
             className="hidden lg:block w-64 flex-shrink-0"
           >
             <div className="sticky top-28">
-              <div className="bg-neutral-50 rounded-lg p-6 border border-neutral-200">
+              <div className="max-h-[calc(100vh-8rem)] overflow-y-auto bg-neutral-50 rounded-lg p-6 border border-neutral-200">
                 <h3 className="text-lg font-bold text-neutral-900 mb-4">
                   {t("equipment.categories")}
                 </h3>
