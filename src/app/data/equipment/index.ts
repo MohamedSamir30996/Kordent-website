@@ -22,7 +22,6 @@ const galleryExtrasById: Record<number, number[]> = {
   4: [4, 5],
   5: [5],
   7: [7],
-  8: [8, 3],
   22: [22, 23, 24],
   23: [23, 24, 25],
   27: [27, 21],
