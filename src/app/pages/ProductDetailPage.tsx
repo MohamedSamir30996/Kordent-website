@@ -82,7 +82,7 @@ export function ProductDetailPage() {
             <button
               type="button"
               onClick={() => setEnlarged(true)}
-              className="w-full border border-neutral-200 bg-neutral-50 p-6 rounded-sm hover:border-sky-300 transition-colors"
+              className="w-full border border-neutral-200 bg-transparent p-6 rounded-sm hover:border-sky-300 transition-colors"
             >
               <img
                 src={mainImage}

@@ -267,7 +267,7 @@ export function Equipment() {
                           <h3 className="text-2xl font-semibold text-neutral-900 mb-6">
                             {subcategory.name}
                           </h3>
-                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             {filteredProducts.map(
                               (product, productIndex) => (
                                 <motion.div
@@ -289,11 +289,11 @@ export function Equipment() {
                                     to={`/equipment/${product.slug}`}
                                     className="group block"
                                   >
-                                    <div className="relative overflow-hidden rounded-lg mb-4 aspect-[4/3] bg-neutral-50">
+                                    <div className="relative overflow-hidden rounded-lg mb-4 aspect-[4/3] bg-transparent">
                                       <img
                                         src={product.image}
                                         alt={product.name}
-                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                        className="w-full h-full object-contain"
                                       />
                                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                     </div>
