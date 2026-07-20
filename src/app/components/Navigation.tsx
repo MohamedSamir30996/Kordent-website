@@ -143,6 +143,16 @@ export function Navigation() {
             {t("nav.solutions")}
           </Link>
           <Link
+            to="/catalogue"
+            className={`transition-colors pb-1 border-b-2 ${
+              location.pathname === "/catalogue"
+                ? "text-blue-600 border-blue-600"
+                : "text-neutral-700 hover:text-[#DC2626] border-transparent"
+            }`}
+          >
+            {t("nav.catalogue")}
+          </Link>
+          <Link
             to="/contact"
             className={`transition-colors pb-1 border-b-2 ${
               location.pathname === "/contact"

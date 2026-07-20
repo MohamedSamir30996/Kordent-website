@@ -1,6 +1,6 @@
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import { useLanguage } from "../i18n";
 
 export function Contact() {
@@ -22,7 +22,7 @@ export function Contact() {
           </h2>
           <p className="text-xl text-neutral-600 mb-12">{t("contact.lead")}</p>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
+          <div className="grid md:grid-cols-2 gap-8 mb-12 max-w-2xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -45,27 +45,12 @@ export function Contact() {
               className="flex flex-col items-center"
             >
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                <Phone className="w-6 h-6 text-blue-700" />
-              </div>
-              <h3 className="font-bold text-neutral-900 mb-2">
-                {t("contact.phone")}
-              </h3>
-              <p className="text-neutral-600">+201023456789</p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-col items-center"
-            >
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
                 <MapPin className="w-6 h-6 text-blue-700" />
               </div>
               <h3 className="font-bold text-neutral-900 mb-2">
                 {t("contact.location")}
               </h3>
-              <p className="text-neutral-600">Cairo, Egypt</p>
+              <p className="text-neutral-600">{t("contact.locationValue")}</p>
             </motion.div>
           </div>
 

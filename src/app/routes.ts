@@ -6,6 +6,7 @@ import { ProductDetailPage } from "./pages/ProductDetailPage";
 import { AboutPage } from "./pages/AboutPage";
 import { SolutionsPage } from "./pages/SolutionsPage";
 import { ContactPage } from "./pages/ContactPage";
+import { CataloguePage } from "./pages/CataloguePage";
 import { PrivacyPolicyPage } from "./pages/PrivacyPolicyPage";
 import { TermsOfUsePage } from "./pages/TermsOfUsePage";
 import { NotFoundPage } from "./pages/NotFoundPage";
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
       { path: "equipment/:slug", Component: ProductDetailPage },
       { path: "about", Component: AboutPage },
       { path: "solutions", Component: SolutionsPage },
+      { path: "catalogue", Component: CataloguePage },
       { path: "contact", Component: ContactPage },
       { path: "privacy", Component: PrivacyPolicyPage },
       { path: "terms", Component: TermsOfUsePage },

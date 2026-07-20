@@ -18,6 +18,7 @@ const en = {
   "nav.about": "About",
   "nav.products": "Products",
   "nav.solutions": "Solutions",
+  "nav.catalogue": "Catalogue",
   "nav.contact": "Contact",
   "nav.switchLanguage": "Switch language",
 
@@ -82,7 +83,20 @@ const en = {
   "contact.email": "Email",
   "contact.phone": "Phone",
   "contact.location": "Location",
+  "contact.locationValue": "South Korea",
   "contact.cta": "Request Consultation",
+
+  // Catalogue page
+  "catalogue.title": "Download our catalogue",
+  "catalogue.lead":
+    "Explore the full Kordent product range in one PDF — materials, kits, and clinical solutions ready for your practice.",
+  "catalogue.download": "Download PDF",
+  "catalogue.hint": "Instant download. No signup required.",
+  "catalogue.point1": "Complete product overview across every category",
+  "catalogue.point2": "Ideal for clinics, distributors, and partners",
+  "catalogue.point3": "Updated specifications in a shareable PDF format",
+  "catalogue.previewTitle": "Product catalogue",
+  "catalogue.previewMeta": "PDF · Ready to download",
 
   // Footer
   "footer.about": "About",
@@ -191,6 +205,7 @@ const ko: Record<TranslationKey, string> = {
   "nav.about": "회사 소개",
   "nav.products": "제품",
   "nav.solutions": "솔루션",
+  "nav.catalogue": "카탈로그",
   "nav.contact": "문의",
   "nav.switchLanguage": "언어 변경",
 
@@ -252,7 +267,20 @@ const ko: Record<TranslationKey, string> = {
   "contact.email": "이메일",
   "contact.phone": "전화",
   "contact.location": "위치",
+  "contact.locationValue": "대한민국",
   "contact.cta": "상담 요청하기",
+
+  // Catalogue page
+  "catalogue.title": "카탈로그 다운로드",
+  "catalogue.lead":
+    "Kordent 전체 제품 라인업을 하나의 PDF로 확인하세요. 재료, 키트, 임상 솔루션을 한눈에 볼 수 있습니다.",
+  "catalogue.download": "PDF 다운로드",
+  "catalogue.hint": "즉시 다운로드. 가입이 필요 없습니다.",
+  "catalogue.point1": "모든 카테고리의 완전한 제품 개요",
+  "catalogue.point2": "클리닉, 유통사, 파트너에게 적합",
+  "catalogue.point3": "공유하기 쉬운 PDF 형식의 최신 사양",
+  "catalogue.previewTitle": "제품 카탈로그",
+  "catalogue.previewMeta": "PDF · 다운로드 가능",
 
   // Footer
   "footer.about": "회사 소개",

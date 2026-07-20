@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { Link } from "react-router";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import { useLanguage } from "../i18n";
 import { PaymentLogos } from "../components/PaymentLogos";
 
@@ -52,32 +52,13 @@ export function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <Phone className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
-                  <div>
-                    <div className="font-semibold mb-1">
-                      {t("contact.phone")}
-                    </div>
-                    <a
-                      href="tel:+1234567890"
-                      className="text-neutral-600 hover:text-blue-600 transition-colors"
-                    >
-                      +1 (234) 567-8900
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
                   <MapPin className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
                   <div>
                     <div className="font-semibold mb-1">
                       {t("contactPage.address")}
                     </div>
                     <div className="text-neutral-600">
-                      123 Medical Plaza
-                      <br />
-                      Suite 456
-                      <br />
-                      Healthcare City, HC 78901
+                      {t("contact.locationValue")}
                     </div>
                   </div>
                 </div>
