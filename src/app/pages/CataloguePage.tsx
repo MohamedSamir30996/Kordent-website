@@ -1,10 +1,60 @@
 import { motion } from "motion/react";
-import { Download, FileText, ArrowRight } from "lucide-react";
+import { Download, ArrowRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "../i18n";
 import cataloguePdf from "../../assets/catalogue/Kordent.pdf";
 
 export function CataloguePage() {
   const { t } = useLanguage();
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [previewReady, setPreviewReady] = useState(false);
+  const [previewFailed, setPreviewFailed] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function renderFirstPage() {
+      try {
+        const pdfjs = await import("pdfjs-dist");
+        const workerSrc = (
+          await import("pdfjs-dist/build/pdf.worker.min.mjs?url")
+        ).default;
+        pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
+
+        const loadingTask = pdfjs.getDocument(cataloguePdf);
+        const pdf = await loadingTask.promise;
+        const page = await pdf.getPage(1);
+        const canvas = canvasRef.current;
+        if (!canvas || cancelled) return;
+
+        const baseViewport = page.getViewport({ scale: 1 });
+        const targetWidth = 720;
+        const scale = targetWidth / baseViewport.width;
+        const viewport = page.getViewport({ scale });
+
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+
+        const context = canvas.getContext("2d");
+        if (!context) return;
+
+        await page.render({
+          canvasContext: context,
+          viewport,
+          canvas,
+        }).promise;
+
+        if (!cancelled) setPreviewReady(true);
+      } catch {
+        if (!cancelled) setPreviewFailed(true);
+      }
+    }
+
+    void renderFirstPage();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[radial-gradient(ellipse_at_top,_#eff6ff_0%,_#ffffff_45%,_#fafafa_100%)] pt-24 pb-20">
@@ -90,28 +140,25 @@ export function CataloguePage() {
                     Kordent.pdf
                   </span>
                 </div>
-                <div className="p-8 md:p-10">
-                  <div className="flex items-center gap-4 mb-8">
-                    <div className="w-14 h-14 rounded-xl bg-sky-50 flex items-center justify-center">
-                      <FileText className="w-7 h-7 text-sky-700" />
+                <div className="relative bg-neutral-100">
+                  {!previewReady && !previewFailed && (
+                    <div className="absolute inset-0 z-10 flex items-center justify-center bg-neutral-100/90">
+                      <div className="h-8 w-8 rounded-full border-2 border-sky-600 border-t-transparent animate-spin" />
                     </div>
-                    <div>
-                      <p className="text-xl font-bold text-neutral-900">
-                        {t("catalogue.previewTitle")}
-                      </p>
-                      <p className="text-sm text-neutral-500">
-                        {t("catalogue.previewMeta")}
-                      </p>
+                  )}
+                  {previewFailed ? (
+                    <div className="aspect-[3/4] flex items-center justify-center px-8 text-center text-neutral-500 text-sm">
+                      {t("catalogue.previewMeta")}
                     </div>
-                  </div>
-                  <div className="space-y-3">
-                    <div className="h-3 rounded-full bg-neutral-100 w-[88%]" />
-                    <div className="h-3 rounded-full bg-neutral-100 w-[72%]" />
-                    <div className="h-3 rounded-full bg-neutral-100 w-[80%]" />
-                    <div className="h-24 rounded-xl bg-gradient-to-br from-sky-50 to-neutral-50 border border-neutral-100 mt-6" />
-                    <div className="h-3 rounded-full bg-neutral-100 w-[64%] mt-4" />
-                    <div className="h-3 rounded-full bg-neutral-100 w-[78%]" />
-                  </div>
+                  ) : (
+                    <canvas
+                      ref={canvasRef}
+                      className={`block w-full h-auto transition-opacity duration-500 ${
+                        previewReady ? "opacity-100" : "opacity-0 min-h-[28rem]"
+                      }`}
+                      aria-label={t("catalogue.previewTitle")}
+                    />
+                  )}
                 </div>
               </div>
             </motion.div>
