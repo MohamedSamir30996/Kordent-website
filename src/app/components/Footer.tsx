@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import { useLanguage } from "../i18n";
 
 export function Footer() {
@@ -23,12 +22,6 @@ export function Footer() {
             <a href="#contact" className="hover:text-white transition-colors">
               {t("footer.contact")}
             </a>
-            <Link to="/privacy" className="hover:text-white transition-colors">
-              {t("footer.privacy")}
-            </Link>
-            <Link to="/terms" className="hover:text-white transition-colors">
-              {t("footer.terms")}
-            </Link>
           </div>
 
           <div className="text-sm text-neutral-400 text-center md:text-right">
