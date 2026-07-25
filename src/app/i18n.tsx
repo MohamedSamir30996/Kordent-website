@@ -166,6 +166,11 @@ const en = {
   "contactPage.form.message": "Message",
   "contactPage.form.messagePlaceholder": "Tell us about your needs...",
   "contactPage.form.send": "Send Message",
+  "contactPage.form.sending": "Sending...",
+  "contactPage.form.success":
+    "Thank you. Your message has been sent to info@kordent.co.kr.",
+  "contactPage.form.error":
+    "Something went wrong. Please try again or email info@kordent.co.kr directly.",
   "contactPage.form.disclaimer.part1":
     "By submitting this form, you agree that Kordent may use your contact details and message to respond to your inquiry in accordance with our ",
   "contactPage.form.disclaimer.part2": " and ",
@@ -349,6 +354,11 @@ const ko: Record<TranslationKey, string> = {
   "contactPage.form.message": "메시지",
   "contactPage.form.messagePlaceholder": "필요하신 사항을 알려주세요...",
   "contactPage.form.send": "메시지 보내기",
+  "contactPage.form.sending": "전송 중...",
+  "contactPage.form.success":
+    "감사합니다. 메시지가 info@kordent.co.kr로 전송되었습니다.",
+  "contactPage.form.error":
+    "전송에 실패했습니다. 다시 시도하거나 info@kordent.co.kr로 직접 이메일을 보내 주세요.",
   "contactPage.form.disclaimer.part1":
     "본 양식을 제출함으로써 귀하는 Kordent가 귀하의 연락처 정보 및 메시지를 문의 응답을 위해 이용하는 것에 동의하며, 그 처리는 당사의 ",
   "contactPage.form.disclaimer.part2": " 및 ",

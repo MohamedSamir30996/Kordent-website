@@ -1,11 +1,36 @@
 import { motion } from "motion/react";
 import { Link } from "react-router";
 import { Mail, MapPin } from "lucide-react";
+import { useState, type FormEvent } from "react";
 import { useLanguage } from "../i18n";
 import { PaymentLogos } from "../components/PaymentLogos";
+import { submitContactForm } from "../lib/contactForm";
+
+type FormStatus = "idle" | "loading" | "success" | "error";
 
 export function ContactPage() {
   const { t } = useLanguage();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<FormStatus>("idle");
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setStatus("loading");
+
+    try {
+      await submitContactForm({ name, email, phone, message });
+      setStatus("success");
+      setName("");
+      setEmail("");
+      setPhone("");
+      setMessage("");
+    } catch {
+      setStatus("error");
+    }
+  };
 
   return (
     <div className="relative min-h-screen bg-white pt-24 pb-16">
@@ -91,7 +116,25 @@ export function ContactPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
+              {status === "success" && (
+                <div
+                  role="status"
+                  className="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-green-800"
+                >
+                  {t("contactPage.form.success")}
+                </div>
+              )}
+
+              {status === "error" && (
+                <div
+                  role="alert"
+                  className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-red-800"
+                >
+                  {t("contactPage.form.error")}
+                </div>
+              )}
+
               <div>
                 <label
                   htmlFor="name"
@@ -102,6 +145,10 @@ export function ContactPage() {
                 <input
                   type="text"
                   id="name"
+                  name="name"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder={t("contactPage.form.namePlaceholder")}
                 />
@@ -117,6 +164,10 @@ export function ContactPage() {
                 <input
                   type="email"
                   id="email"
+                  name="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder={t("contactPage.form.emailPlaceholder")}
                 />
@@ -132,6 +183,9 @@ export function ContactPage() {
                 <input
                   type="tel"
                   id="phone"
+                  name="phone"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                   className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder={t("contactPage.form.phonePlaceholder")}
                 />
@@ -146,7 +200,11 @@ export function ContactPage() {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   rows={5}
+                  required
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                   className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
                   placeholder={t("contactPage.form.messagePlaceholder")}
                 />
@@ -154,9 +212,12 @@ export function ContactPage() {
 
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white px-8 py-4 rounded-lg hover:bg-blue-700 transition-colors font-semibold"
+                disabled={status === "loading"}
+                className="w-full bg-blue-600 text-white px-8 py-4 rounded-lg hover:bg-blue-700 transition-colors font-semibold disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                {t("contactPage.form.send")}
+                {status === "loading"
+                  ? t("contactPage.form.sending")
+                  : t("contactPage.form.send")}
               </button>
 
               <p className="text-sm text-neutral-600 leading-relaxed">
