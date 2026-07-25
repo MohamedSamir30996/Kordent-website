@@ -65,7 +65,7 @@ export function Hero() {
       {/* Social Media Buttons */}
       <div className="absolute right-8 md:right-12 bottom-32 z-10 flex flex-col gap-4">
         <motion.a
-          href="https://facebook.com"
+          href="https://www.facebook.com/share/1EJQ1fyuok/"
           target="_blank"
           rel="noopener noreferrer"
           initial={{ opacity: 0, x: 30 }}
