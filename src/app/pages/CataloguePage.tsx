@@ -2,7 +2,9 @@ import { motion } from "motion/react";
 import { Download, ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "../i18n";
-import cataloguePdf from "../../assets/catalogue/Kordent.pdf";
+
+const CATALOGUE_PDF_URL = "/catalogue/Kordent.pdf";
+const CATALOGUE_PDF_FILENAME = "Kordent.pdf";
 
 export function CataloguePage() {
   const { t } = useLanguage();
@@ -21,7 +23,7 @@ export function CataloguePage() {
         ).default;
         pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
 
-        const loadingTask = pdfjs.getDocument(cataloguePdf);
+        const loadingTask = pdfjs.getDocument(CATALOGUE_PDF_URL);
         const pdf = await loadingTask.promise;
         const page = await pdf.getPage(1);
         const canvas = canvasRef.current;
@@ -89,8 +91,8 @@ export function CataloguePage() {
 
             <div className="flex flex-wrap items-center gap-4">
               <motion.a
-                href={cataloguePdf}
-                download="Kordent-Catalogue.pdf"
+                href={CATALOGUE_PDF_URL}
+                download={CATALOGUE_PDF_FILENAME}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center gap-3 bg-[#DC2626] text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg shadow-red-200/60 hover:bg-[#b91c1c] transition-colors"
