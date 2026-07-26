@@ -102,7 +102,7 @@ export function Hero() {
           </svg>
         </motion.a>
         <motion.a
-          href="https://t.me/"
+          href="https://t.me/+201099932000"
           target="_blank"
           rel="noopener noreferrer"
           initial={{ opacity: 0, x: 30 }}
